@@ -2,8 +2,8 @@
 (
 	[id] INT NOT NULL PRIMARY KEY, 
     [name] VARCHAR(50) NOT NULL, 
-    [Categorie_id] INT NOT NULL, 
-    CONSTRAINT [FK_Quizzes_Categorie_id] FOREIGN KEY ([Categorie_id]) REFERENCES [Categorie]([id])
+    [Categories_id] INT NOT NULL, 
+    CONSTRAINT [FK_Quizzes_Categories_id] FOREIGN KEY ([Categories_id]) REFERENCES [Categories]([id])
 )
 
 GO
@@ -12,4 +12,4 @@ CREATE INDEX [IX_Quizzes_Id] ON [dbo].[Quizzes] ([id])
 
 GO
 
-CREATE INDEX [IX_Quizzes_Categorie] ON [dbo].[Quizzes] ([Categorie_id])
+CREATE INDEX [IX_Quizzes_Categorie] ON [dbo].[Quizzes] ([Categories_id])

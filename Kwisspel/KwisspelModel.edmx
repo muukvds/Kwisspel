@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="kwisspelModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Anwsers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Quizzes_id" Type="int" Nullable="false" />
+          <Property Name="Questions_id" Type="int" Nullable="false" />
+          <Property Name="QuestionOptions_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionOptions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="questions_id" Type="int" Nullable="false" />
+          <Property Name="anwser" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isAnwser" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Questions">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="question" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuestionsQuizzes">
+          <Key>
+            <PropertyRef Name="Questions_id" />
+            <PropertyRef Name="Quizzes_id" />
+          </Key>
+          <Property Name="Questions_id" Type="int" Nullable="false" />
+          <Property Name="Quizzes_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Quizzes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Categories_id" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Anwsers_QuestionOptions">
+          <End Role="QuestionOptions" Type="Self.QuestionOptions" Multiplicity="1" />
+          <End Role="Anwsers" Type="Self.Anwsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionOptions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Anwsers">
+              <PropertyRef Name="QuestionOptions_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anwsers_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Anwsers" Type="Self.Anwsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Anwsers">
+              <PropertyRef Name="Questions_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anwsers_Quizzes">
+          <End Role="Quizzes" Type="Self.Quizzes" Multiplicity="1" />
+          <End Role="Anwsers" Type="Self.Anwsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quizzes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Anwsers">
+              <PropertyRef Name="Quizzes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionOptions_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="QuestionOptions" Type="Self.QuestionOptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuestionOptions">
+              <PropertyRef Name="questions_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionsQuizzes_Questions">
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="QuestionsQuizzes" Type="Self.QuestionsQuizzes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuestionsQuizzes">
+              <PropertyRef Name="Questions_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionsQuizzes_Quizzes">
+          <End Role="Quizzes" Type="Self.Quizzes" Multiplicity="1" />
+          <End Role="QuestionsQuizzes" Type="Self.QuestionsQuizzes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quizzes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuestionsQuizzes">
+              <PropertyRef Name="Quizzes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quizzes_Categories_id">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Quizzes" Type="Self.Quizzes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Quizzes">
+              <PropertyRef Name="Categories_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kwisspelModelStoreContainer">
+          <EntitySet Name="Anwsers" EntityType="Self.Anwsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionOptions" EntityType="Self.QuestionOptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Questions" EntityType="Self.Questions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuestionsQuizzes" EntityType="Self.QuestionsQuizzes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Quizzes" EntityType="Self.Quizzes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Anwsers_QuestionOptions" Association="Self.FK_Anwsers_QuestionOptions">
+            <End Role="QuestionOptions" EntitySet="QuestionOptions" />
+            <End Role="Anwsers" EntitySet="Anwsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anwsers_Questions" Association="Self.FK_Anwsers_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Anwsers" EntitySet="Anwsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anwsers_Quizzes" Association="Self.FK_Anwsers_Quizzes">
+            <End Role="Quizzes" EntitySet="Quizzes" />
+            <End Role="Anwsers" EntitySet="Anwsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionOptions_Questions" Association="Self.FK_QuestionOptions_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionOptions" EntitySet="QuestionOptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionsQuizzes_Questions" Association="Self.FK_QuestionsQuizzes_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionsQuizzes" EntitySet="QuestionsQuizzes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionsQuizzes_Quizzes" Association="Self.FK_QuestionsQuizzes_Quizzes">
+            <End Role="Quizzes" EntitySet="Quizzes" />
+            <End Role="QuestionsQuizzes" EntitySet="QuestionsQuizzes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quizzes_Categories_id" Association="Self.FK_Quizzes_Categories_id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Quizzes" EntitySet="Quizzes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kwisspelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Anwser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Quizzes_id" Type="Int32" Nullable="false" />
+          <Property Name="Questions_id" Type="Int32" Nullable="false" />
+          <Property Name="QuestionOptions_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="QuestionOption" Relationship="Self.FK_Anwsers_QuestionOptions" FromRole="Anwsers" ToRole="QuestionOptions" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_Anwsers_Questions" FromRole="Anwsers" ToRole="Questions" />
+          <NavigationProperty Name="Quizze" Relationship="Self.FK_Anwsers_Quizzes" FromRole="Anwsers" ToRole="Quizzes" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Quizzes" Relationship="Self.FK_Quizzes_Categories_id" FromRole="Categories" ToRole="Quizzes" />
+        </EntityType>
+        <EntityType Name="QuestionOption">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="questions_id" Type="Int32" Nullable="false" />
+          <Property Name="anwser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isAnwser" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Anwsers" Relationship="Self.FK_Anwsers_QuestionOptions" FromRole="QuestionOptions" ToRole="Anwsers" />
+          <NavigationProperty Name="Question" Relationship="Self.FK_QuestionOptions_Questions" FromRole="QuestionOptions" ToRole="Questions" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="question1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Anwsers" Relationship="Self.FK_Anwsers_Questions" FromRole="Questions" ToRole="Anwsers" />
+          <NavigationProperty Name="QuestionOptions" Relationship="Self.FK_QuestionOptions_Questions" FromRole="Questions" ToRole="QuestionOptions" />
+          <NavigationProperty Name="Quizzes" Relationship="Self.QuestionsQuizzes" FromRole="Questions" ToRole="Quizzes" />
+        </EntityType>
+        <EntityType Name="Quizze">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Categories_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Anwsers" Relationship="Self.FK_Anwsers_Quizzes" FromRole="Quizzes" ToRole="Anwsers" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Quizzes_Categories_id" FromRole="Quizzes" ToRole="Categories" />
+          <NavigationProperty Name="Questions" Relationship="Self.QuestionsQuizzes" FromRole="Quizzes" ToRole="Questions" />
+        </EntityType>
+        <Association Name="FK_Anwsers_QuestionOptions">
+          <End Role="QuestionOptions" Type="Self.QuestionOption" Multiplicity="1" />
+          <End Role="Anwsers" Type="Self.Anwser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuestionOptions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Anwsers">
+              <PropertyRef Name="QuestionOptions_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anwsers_Questions">
+          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+          <End Role="Anwsers" Type="Self.Anwser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Anwsers">
+              <PropertyRef Name="Questions_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Anwsers_Quizzes">
+          <End Role="Quizzes" Type="Self.Quizze" Multiplicity="1" />
+          <End Role="Anwsers" Type="Self.Anwser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quizzes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Anwsers">
+              <PropertyRef Name="Quizzes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quizzes_Categories_id">
+          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
+          <End Role="Quizzes" Type="Self.Quizze" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Quizzes">
+              <PropertyRef Name="Categories_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionOptions_Questions">
+          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
+          <End Role="QuestionOptions" Type="Self.QuestionOption" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Questions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuestionOptions">
+              <PropertyRef Name="questions_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="QuestionsQuizzes">
+          <End Role="Questions" Type="Self.Question" Multiplicity="*" />
+          <End Role="Quizzes" Type="Self.Quizze" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="kwisspelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Anwsers" EntityType="Self.Anwser" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="QuestionOptions" EntityType="Self.QuestionOption" />
+          <EntitySet Name="Questions" EntityType="Self.Question" />
+          <EntitySet Name="Quizzes" EntityType="Self.Quizze" />
+          <AssociationSet Name="FK_Anwsers_QuestionOptions" Association="Self.FK_Anwsers_QuestionOptions">
+            <End Role="QuestionOptions" EntitySet="QuestionOptions" />
+            <End Role="Anwsers" EntitySet="Anwsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anwsers_Questions" Association="Self.FK_Anwsers_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Anwsers" EntitySet="Anwsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Anwsers_Quizzes" Association="Self.FK_Anwsers_Quizzes">
+            <End Role="Quizzes" EntitySet="Quizzes" />
+            <End Role="Anwsers" EntitySet="Anwsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quizzes_Categories_id" Association="Self.FK_Quizzes_Categories_id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Quizzes" EntitySet="Quizzes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionOptions_Questions" Association="Self.FK_QuestionOptions_Questions">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="QuestionOptions" EntitySet="QuestionOptions" />
+          </AssociationSet>
+          <AssociationSet Name="QuestionsQuizzes" Association="Self.QuestionsQuizzes">
+            <End Role="Questions" EntitySet="Questions" />
+            <End Role="Quizzes" EntitySet="Quizzes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="kwisspelModelStoreContainer" CdmEntityContainer="kwisspelEntities">
+          <EntitySetMapping Name="Anwsers">
+            <EntityTypeMapping TypeName="kwisspelModel.Anwser">
+              <MappingFragment StoreEntitySet="Anwsers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Quizzes_id" ColumnName="Quizzes_id" />
+                <ScalarProperty Name="Questions_id" ColumnName="Questions_id" />
+                <ScalarProperty Name="QuestionOptions_id" ColumnName="QuestionOptions_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="kwisspelModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuestionOptions">
+            <EntityTypeMapping TypeName="kwisspelModel.QuestionOption">
+              <MappingFragment StoreEntitySet="QuestionOptions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="questions_id" ColumnName="questions_id" />
+                <ScalarProperty Name="anwser" ColumnName="anwser" />
+                <ScalarProperty Name="isAnwser" ColumnName="isAnwser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="kwisspelModel.Question">
+              <MappingFragment StoreEntitySet="Questions">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="question1" ColumnName="question" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quizzes">
+            <EntityTypeMapping TypeName="kwisspelModel.Quizze">
+              <MappingFragment StoreEntitySet="Quizzes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Categories_id" ColumnName="Categories_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="QuestionsQuizzes" TypeName="kwisspelModel.QuestionsQuizzes" StoreEntitySet="QuestionsQuizzes">
+            <EndProperty Name="Questions">
+              <ScalarProperty Name="id" ColumnName="Questions_id" />
+            </EndProperty>
+            <EndProperty Name="Quizzes">
+              <ScalarProperty Name="id" ColumnName="Quizzes_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

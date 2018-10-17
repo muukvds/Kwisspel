@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6a6bcc6d2d334eaf9fe1b1f2da0e2d9a" Name="Diagram1">
+        <EntityTypeShape EntityType="kwisspelModel.Anwser" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kwisspelModel.Category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="kwisspelModel.QuestionOption" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kwisspelModel.Question" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kwisspelModel.Quizze" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="kwisspelModel.FK_Anwsers_QuestionOptions" ManuallyRouted="false" />
+        <AssociationConnector Association="kwisspelModel.FK_Anwsers_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="kwisspelModel.FK_Anwsers_Quizzes" ManuallyRouted="false" />
+        <AssociationConnector Association="kwisspelModel.FK_Quizzes_Categories_id" ManuallyRouted="false" />
+        <AssociationConnector Association="kwisspelModel.FK_QuestionOptions_Questions" ManuallyRouted="false" />
+        <AssociationConnector Association="kwisspelModel.QuestionsQuizzes" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
