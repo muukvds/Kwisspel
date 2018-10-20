@@ -21,9 +21,9 @@ namespace Kwisspel
         }
     
         public int id { get; set; }
-        public int questions_id { get; set; }
+        public int Questions_id { get; set; }
         public string anwser { get; set; }
-        public byte isAnwser { get; set; }
+        public bool isAnwser { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Anwser> Anwsers { get; set; }

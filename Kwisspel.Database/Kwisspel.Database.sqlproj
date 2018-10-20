@@ -75,4 +75,11 @@
   <ItemGroup>
     <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Seed\Categories.sql" />
+    <None Include="Scripts\Seed\Quizzes.sql" />
+    <None Include="Scripts\Seed\Questions.sql" />
+    <None Include="Scripts\Seed\QuestionOptions.sql" />
+    <None Include="Scripts\Seed\QuestionsQuizzes.sql" />
+  </ItemGroup>
 </Project>

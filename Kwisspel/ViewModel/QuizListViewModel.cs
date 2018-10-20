@@ -1,4 +1,7 @@
 using GalaSoft.MvvmLight;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Kwisspel.ViewModel
 {
@@ -14,26 +17,38 @@ namespace Kwisspel.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class QuizListViewModel : ViewModelBase
+   public class QuizListViewModel : ViewModelBase
     {
+        public ObservableCollection<QuizViewModel> Quizzes { get; set; }
+
+        private QuizViewModel _selectedQuiz;
+
+        public QuizViewModel SelectedQuiz
+        {
+            get { return _selectedQuiz; }
+            set
+            {
+                _selectedQuiz = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public QuizListViewModel()
         {
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
-            ///
 
-
+       
+            using (var context = new KwisspelEntities())
+            {
+                var quizList = context.Quizzes.ToList().Select(q => new QuizViewModel(q));
+                Quizzes = new ObservableCollection<QuizViewModel>(quizList);
+            }
+                
 
 
         }
+
     }
 }

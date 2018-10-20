@@ -9,3 +9,9 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+
+:r .\Seed\Categories.sql
+:r .\Seed\Quizzes.sql
+:r .\Seed\Questions.sql
+:r .\Seed\QuestionOptions.sql
+:r .\Seed\QuestionsQuizzes.sql

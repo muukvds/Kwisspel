@@ -1,9 +1,9 @@
 ﻿CREATE TABLE [dbo].[QuestionOptions]
 (
-	[id] INT NOT NULL PRIMARY KEY, 
-    [questions_id] INT NOT NULL, 
-    [anwser] VARCHAR(50) NOT NULL, 
-    [isAnwser] TINYINT NOT NULL DEFAULT 0, 
+	[id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Questions_id] INT NOT NULL, 
+    [anwser] VARCHAR(255) NOT NULL, 
+    [isAnwser] BIT NOT NULL DEFAULT 0, 
     CONSTRAINT [FK_QuestionOptions_Questions] FOREIGN KEY ([Questions_id]) REFERENCES [Questions]([id])
 )
 

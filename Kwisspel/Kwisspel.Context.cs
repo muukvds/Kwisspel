@@ -13,10 +13,10 @@ namespace Kwisspel
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class kwisspelEntities : DbContext
+    public partial class KwisspelEntities : DbContext
     {
-        public kwisspelEntities()
-            : base("name=kwisspelEntities")
+        public KwisspelEntities()
+            : base("name=KwisspelEntities")
         {
         }
     

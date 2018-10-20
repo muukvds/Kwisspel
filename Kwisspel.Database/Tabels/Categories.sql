@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Categories]
 (
-	[id] INT NOT NULL PRIMARY KEY, 
+	[id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [name] VARCHAR(50) NOT NULL
 )
 

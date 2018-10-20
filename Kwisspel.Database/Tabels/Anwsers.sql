@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Anwsers]
 (
-	[id] INT NOT NULL PRIMARY KEY, 
+	[id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Quizzes_id] INT NOT NULL, 
     [Questions_id] INT NOT NULL, 
     [QuestionOptions_id] INT NOT NULL, 

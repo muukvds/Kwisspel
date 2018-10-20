@@ -17,13 +17,13 @@ namespace Kwisspel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.Quizzes = new HashSet<Quizze>();
+            this.Questions = new HashSet<Question>();
         }
     
         public int id { get; set; }
         public string name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Quizze> Quizzes { get; set; }
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }

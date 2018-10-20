@@ -80,41 +80,49 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Anwser.cs">
-      <DependentUpon>KwisspelModel.tt</DependentUpon>
+      <DependentUpon>Kwisspel.tt</DependentUpon>
     </Compile>
     <Compile Include="Category.cs">
-      <DependentUpon>KwisspelModel.tt</DependentUpon>
+      <DependentUpon>Kwisspel.tt</DependentUpon>
     </Compile>
-    <Compile Include="KwisspelModel.Context.cs">
+    <Compile Include="Kwisspel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>KwisspelModel.Context.tt</DependentUpon>
+      <DependentUpon>Kwisspel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="KwisspelModel.cs">
+    <Compile Include="Kwisspel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>KwisspelModel.tt</DependentUpon>
+      <DependentUpon>Kwisspel.tt</DependentUpon>
     </Compile>
-    <Compile Include="KwisspelModel.Designer.cs">
+    <Compile Include="Kwisspel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>KwisspelModel.edmx</DependentUpon>
+      <DependentUpon>Kwisspel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Question.cs">
-      <DependentUpon>KwisspelModel.tt</DependentUpon>
+      <DependentUpon>Kwisspel.tt</DependentUpon>
     </Compile>
     <Compile Include="QuestionOption.cs">
-      <DependentUpon>KwisspelModel.tt</DependentUpon>
+      <DependentUpon>Kwisspel.tt</DependentUpon>
     </Compile>
     <Compile Include="Quizze.cs">
-      <DependentUpon>KwisspelModel.tt</DependentUpon>
+      <DependentUpon>Kwisspel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\QuestionListViewModel.cs" />
+    <Compile Include="ViewModel\QuestionOptionViewModel.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />
     <Compile Include="ViewModel\QuizListViewModel.cs" />
     <Compile Include="ViewModel\QuizViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\PlayQuizWindow.xaml.cs">
       <DependentUpon>PlayQuizWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuestionManagementWindow.xaml.cs">
+      <DependentUpon>QuestionManagementWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuizeManagementWindow.xaml.cs">
+      <DependentUpon>QuizeManagementWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -129,6 +137,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\PlayQuizWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuestionManagementWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuizeManagementWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,12 +167,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="KwisspelModel.edmx">
+    <EntityDeploy Include="Kwisspel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>KwisspelModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Kwisspel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="KwisspelModel.edmx.diagram">
-      <DependentUpon>KwisspelModel.edmx</DependentUpon>
+    <None Include="Kwisspel.edmx.diagram">
+      <DependentUpon>Kwisspel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -168,19 +184,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="KwisspelModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KwisspelModel.edmx</DependentUpon>
-      <LastGenOutput>KwisspelModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="KwisspelModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KwisspelModel.edmx</DependentUpon>
-      <LastGenOutput>KwisspelModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Kwisspel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Kwisspel.edmx</DependentUpon>
+      <LastGenOutput>Kwisspel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Kwisspel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Kwisspel.edmx</DependentUpon>
+      <LastGenOutput>Kwisspel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
