@@ -109,12 +109,25 @@
     <Compile Include="Quizze.cs">
       <DependentUpon>Kwisspel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\QuestionListViewModel.cs" />
+    <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\QuestionManagementViewModel.cs" />
     <Compile Include="ViewModel\QuestionOptionViewModel.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />
     <Compile Include="ViewModel\QuizListViewModel.cs" />
     <Compile Include="ViewModel\QuizViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AddQuestionWindow.xaml.cs">
+      <DependentUpon>AddQuestionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddQuizeWindow.xaml.cs">
+      <DependentUpon>AddQuizeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditQuestionWindow.xaml.cs">
+      <DependentUpon>EditQuestionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EditQuizeWindow.xaml.cs">
+      <DependentUpon>EditQuizeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PlayQuizWindow.xaml.cs">
       <DependentUpon>PlayQuizWindow.xaml</DependentUpon>
     </Compile>
@@ -124,6 +137,22 @@
     <Compile Include="View\QuizeManagementWindow.xaml.cs">
       <DependentUpon>QuizeManagementWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddQuestionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddQuizeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditQuestionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EditQuizeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

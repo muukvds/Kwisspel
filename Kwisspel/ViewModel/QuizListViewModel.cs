@@ -1,7 +1,10 @@
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using Kwisspel.View;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 
 namespace Kwisspel.ViewModel
 {
@@ -19,6 +22,9 @@ namespace Kwisspel.ViewModel
     /// </summary>
    public class QuizListViewModel : ViewModelBase
     {
+
+        public KwisspelEntities Context { get; }
+
         public ObservableCollection<QuizViewModel> Quizzes { get; set; }
 
         private QuizViewModel _selectedQuiz;
@@ -33,22 +39,29 @@ namespace Kwisspel.ViewModel
             }
         }
 
+        public ICommand ShowQuestionManagementCommand { get; set; }
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
         public QuizListViewModel()
         {
+            Context = new KwisspelEntities();
 
-       
-            using (var context = new KwisspelEntities())
-            {
-                var quizList = context.Quizzes.ToList().Select(q => new QuizViewModel(q));
-                Quizzes = new ObservableCollection<QuizViewModel>(quizList);
-            }
-                
+            ShowQuestionManagementCommand = new RelayCommand(ShowQuestionManagement);
+            
 
+            Quizzes = new ObservableCollection<QuizViewModel>(Context.Quizzes.ToList().Select(q => new QuizViewModel(q,Context)));
+        }
+
+        public void ShowQuestionManagement()
+        {
+            var QuestionManagement = new QuestionManagementWindow();
+            QuestionManagement.Show();
 
         }
+
+
 
     }
 }

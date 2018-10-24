@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Kwisspel.View"
         mc:Ignorable="d"
         Title="Vragen beheer" Height="800" Width="800"
-        DataContext="{Binding QuestionList, Source={StaticResource Locator}}">
+        DataContext="{Binding QuestionManagement, Source={StaticResource Locator}}">
     <Border BorderThickness="12">
         <StackPanel>
             <Grid>
@@ -26,10 +26,30 @@
                 </DataGrid.Columns>
             </DataGrid>
 
-            <DataGrid Width="400" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding SelectedQuestion.QuestionOptions }" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+            <ComboBox 
+                ItemsSource="{Binding SelectedQuestion.Categories}" 
+                DisplayMemberPath="Name"
+                SelectedValue="{Binding SelectedQuestion.Category, Mode=TwoWay}"/>
+
+            <DataGrid Width="400" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionOption, Mode=TwoWay}" ItemsSource="{Binding SelectedQuestion.QuestionOptions }" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
-                    <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
+                    <DataGridTextColumn Header="QuestionId" Binding="{Binding QuestionId}" Foreground="#FF1D1616" />
+                    <DataGridTextColumn Header="Anwser" IsReadOnly="False"  Binding="{Binding Anwser}" Width="*" />
+                    <DataGridCheckBoxColumn Header="IsAnwser" Binding="{Binding IsAnwser}"/>                                                                                                                                  
+                    <DataGridTemplateColumn Header="IsAnwser">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox  
+                                Content="Please Select" IsChecked="{Binding IsAnwser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                         
+                                </CheckBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+
+                    
                 </DataGrid.Columns>
             </DataGrid>
 
