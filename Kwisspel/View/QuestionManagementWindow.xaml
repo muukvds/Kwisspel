@@ -23,13 +23,31 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
                     <DataGridTextColumn Header="Naam" Binding="{Binding Question}" Width="*" />
+                    <DataGridTemplateColumn Width="50" Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <!-- De binding naar 'DeleteSongCommand' is anders dan normaal. Hoe komt dit?-->
+                                <Button Command="{Binding DataContext.EditQuestionCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        BorderThickness="0,0,0,1" BorderBrush="YellowGreen" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="30" Background="#FFD45134">Edit</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    
+                    <DataGridTemplateColumn Width="50" Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <!-- De binding naar 'DeleteSongCommand' is anders dan normaal. Hoe komt dit?-->
+                                <Button Command="{Binding DataContext.DeleteQuestionOCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        BorderThickness="0,0,0,1" BorderBrush="Red" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="30" Background="#FFD45134">Delete</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
-            <ComboBox 
-                ItemsSource="{Binding SelectedQuestion.Categories}" 
-                DisplayMemberPath="Name"
-                SelectedValue="{Binding SelectedQuestion.Category, Mode=TwoWay}"/>
+            <Label Content ="Category:"/>
+            <Label Content ="{Binding SelectedQuestion.Category.Name}"/>
+            <Button Content="Niewe vraag " Command="{Binding AddQuestionCommand}"/>
 
             <DataGrid Width="400" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionOption, Mode=TwoWay}" ItemsSource="{Binding SelectedQuestion.QuestionOptions }" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
@@ -37,19 +55,7 @@
                     <DataGridTextColumn Header="QuestionId" Binding="{Binding QuestionId}" Foreground="#FF1D1616" />
                     <DataGridTextColumn Header="Anwser" IsReadOnly="False"  Binding="{Binding Anwser}" Width="*" />
                     <DataGridCheckBoxColumn Header="IsAnwser" Binding="{Binding IsAnwser}"/>                                                                                                                                  
-                    <DataGridTemplateColumn Header="IsAnwser">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox  
-                                Content="Please Select" IsChecked="{Binding IsAnwser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                         
-                                </CheckBox>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-
-
-                    
+                
                 </DataGrid.Columns>
             </DataGrid>
 

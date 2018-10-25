@@ -36,7 +36,7 @@ namespace Kwisspel.ViewModel
 
         private Question _question;
 
-        public QuestionViewModel(KwisspelEntities context)
+        public QuestionViewModel(KwisspelEntities context )
         {
             _context = context;
             _question = new Question();

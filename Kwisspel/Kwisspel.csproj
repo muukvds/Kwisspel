@@ -109,6 +109,7 @@
     <Compile Include="Quizze.cs">
       <DependentUpon>Kwisspel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddQuestionViewModel.cs" />
     <Compile Include="ViewModel\CategoryViewModel.cs" />
     <Compile Include="ViewModel\QuestionManagementViewModel.cs" />
     <Compile Include="ViewModel\QuestionOptionViewModel.cs" />
