@@ -23,7 +23,7 @@ namespace Kwisspel
         }
     
         public int id { get; set; }
-        public string question1 { get; set; }
+        public string question { get; set; }
         public int Categories_id { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

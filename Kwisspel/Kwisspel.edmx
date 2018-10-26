@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Anwsers">
           <Key>
             <PropertyRef Name="id" />
@@ -66,7 +66,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Anwsers_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Anwsers" Type="Self.Anwsers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -78,7 +80,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Anwsers_Quizzes">
-          <End Role="Quizzes" Type="Self.Quizzes" Multiplicity="1" />
+          <End Role="Quizzes" Type="Self.Quizzes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Anwsers" Type="Self.Anwsers" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Quizzes">
@@ -90,7 +94,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionOptions_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="QuestionOptions" Type="Self.QuestionOptions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -102,7 +108,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionsQuizzes_Questions">
-          <End Role="Questions" Type="Self.Questions" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="QuestionsQuizzes" Type="Self.QuestionsQuizzes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Questions">
@@ -114,7 +122,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionsQuizzes_Quizzes">
-          <End Role="Quizzes" Type="Self.Quizzes" Multiplicity="1" />
+          <End Role="Quizzes" Type="Self.Quizzes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="QuestionsQuizzes" Type="Self.QuestionsQuizzes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Quizzes">
@@ -173,8 +183,7 @@
             <End Role="Questions" EntitySet="Questions" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -214,7 +223,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="question1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="question" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Categories_id" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Anwsers" Relationship="Self.FK_Anwsers_Questions" FromRole="Questions" ToRole="Anwsers" />
           <NavigationProperty Name="Category" Relationship="Self.FK_Quizzes_Categories_id" FromRole="Questions" ToRole="Categories" />
@@ -363,7 +372,7 @@
             <EntityTypeMapping TypeName="Model.Question">
               <MappingFragment StoreEntitySet="Questions">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="question1" ColumnName="question" />
+                <ScalarProperty Name="question" ColumnName="question" />
                 <ScalarProperty Name="Categories_id" ColumnName="Categories_id" />
               </MappingFragment>
             </EntityTypeMapping>

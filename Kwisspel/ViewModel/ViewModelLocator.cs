@@ -64,6 +64,13 @@ namespace Kwisspel.ViewModel
 
         }
 
+        public AddQuestionViewModel AddQuestion
+        {
+            get {
+                return new AddQuestionViewModel(ServiceLocator.Current.GetInstance<QuizListViewModel>().Context);
+            }
+        }
+
 
 
         public static void Cleanup()

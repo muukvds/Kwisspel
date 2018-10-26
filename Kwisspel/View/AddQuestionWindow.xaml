@@ -20,13 +20,13 @@
             </Grid>
 
             <Label Content="Vraag:"/>
-            <TextBox Text="{Binding Question, Mode=TwoWay}"/>
+            <TextBox Text="{Binding Question.Question, Mode=TwoWay}"/>
 
             <Label Content ="Category:"/>
             <ComboBox 
-                ItemsSource="{Binding Categories}" 
+                ItemsSource="{Binding Question.Categories}" 
                 DisplayMemberPath="Name"
-                SelectedValue="{Binding Category, Mode=TwoWay}"/>
+                SelectedValue="{Binding Question.Category, Mode=TwoWay}"/>
 
             <Button Content="Nieuw Vragen Optie" Command="{Binding AddQuestionOptionCommand}"/>
             

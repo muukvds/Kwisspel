@@ -23,15 +23,15 @@ namespace Kwisspel.ViewModel
 
         public string Question
         {
-            get { return _question.question1; }
-            set { _question.question1 = value; RaisePropertyChanged("Question"); }
+            get { return _question.question; }
+            set { _question.question = value; RaisePropertyChanged("Question"); }
         }
 
         private CategoryViewModel _category;
 
         public CategoryViewModel Category {
             get { return _category; }
-            set { _category = value;  _question.Category = _category.Model; RaisePropertyChanged("Category"); Save();}
+            set { _category = value;  _question.Category = _category.Model; RaisePropertyChanged("Category");}
         }
 
         private Question _question;
@@ -40,6 +40,7 @@ namespace Kwisspel.ViewModel
         {
             _context = context;
             _question = new Question();
+            _context.Questions.Add(_question);
         
             Categories = new ObservableCollection<CategoryViewModel>(_context.Categories.ToList().Select(c => new CategoryViewModel(c,_context)));
             
@@ -57,16 +58,17 @@ namespace Kwisspel.ViewModel
             _category = Categories.Where(c => c.Id == _question.Categories_id).First();
         }
 
-        private void Save()
+        public void Delete()
         {
-            using (var context = new KwisspelEntities())
+            var childData = _question.QuestionOptions.ToList();
+            foreach (var data in childData)
             {
-                context.Entry(_question).State = EntityState.Modified;
-
-                context.Questions.Attach(_question);
-                //_question.Categories_id = 0;
-                context.SaveChanges();
+                _context.QuestionOptions.Remove(data);
             }
+            _context.SaveChanges();
+        
+        _context.Questions.Remove(_question);
+            _context.SaveChanges();
         }
     }
 }

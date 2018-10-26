@@ -4,7 +4,7 @@
     [Questions_id] INT NOT NULL, 
     [anwser] VARCHAR(255) NOT NULL, 
     [isAnwser] BIT NOT NULL DEFAULT 0, 
-    CONSTRAINT [FK_QuestionOptions_Questions] FOREIGN KEY ([Questions_id]) REFERENCES [Questions]([id])
+    CONSTRAINT [FK_QuestionOptions_Questions] FOREIGN KEY ([Questions_id]) REFERENCES [Questions]([id]) ON DELETE CASCADE
 )
 
 GO
