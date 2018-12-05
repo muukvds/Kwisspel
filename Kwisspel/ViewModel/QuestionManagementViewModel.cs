@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Kwisspel.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -29,12 +30,16 @@ namespace Kwisspel.ViewModel
         }
 
         public ICommand DeleteQuestionCommand { get; set; }
+        public ICommand AddQuestionCommand { get; set; }
+
+
 
         public QuestionManagementViewModel(KwisspelEntities context)
         {
             _context = context;
 
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
+            AddQuestionCommand = new RelayCommand(AddQuestion);
 
             Categories = new ObservableCollection<CategoryViewModel>(_context.Categories.ToList().Select(c => new CategoryViewModel(c, _context)));
             Questions = new ObservableCollection<QuestionViewModel>(_context.Questions.ToList().Select(q => new QuestionViewModel(q, _context)));
@@ -45,8 +50,12 @@ namespace Kwisspel.ViewModel
         {
             SelectedQuestion.Delete();
             Questions.Remove(SelectedQuestion);
-    
-          
+        }
+
+        private void AddQuestion()
+        {
+            AddQuestionWindow addQuestionWindow = new AddQuestionWindow();
+            addQuestionWindow.Show();
         }
 
         private bool CanDeleteQuestion()

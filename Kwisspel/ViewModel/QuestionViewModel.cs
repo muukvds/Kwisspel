@@ -24,14 +24,14 @@ namespace Kwisspel.ViewModel
         public string Question
         {
             get { return _question.question; }
-            set { _question.question = value; RaisePropertyChanged("Question"); }
+            set { _question.question = value; RaisePropertyChanged("Question"); Save(); }
         }
 
         private CategoryViewModel _category;
 
         public CategoryViewModel Category {
             get { return _category; }
-            set { _category = value;  _question.Category = _category.Model; RaisePropertyChanged("Category");}
+            set { _category = value;  _question.Category = _category.Model; RaisePropertyChanged("Category"); Save(); }
         }
 
         private Question _question;
@@ -41,10 +41,11 @@ namespace Kwisspel.ViewModel
             _context = context;
             _question = new Question();
             _context.Questions.Add(_question);
-        
+
+            QuestionOptions = new ObservableCollection<QuestionOptionViewModel>();
             Categories = new ObservableCollection<CategoryViewModel>(_context.Categories.ToList().Select(c => new CategoryViewModel(c,_context)));
-            
-            _category = Categories.Where(c => c.Id == _question.Categories_id).First();
+           
+            _context.Questions.Add(_question);
         }
 
         public QuestionViewModel(Question q, KwisspelEntities context)
@@ -56,6 +57,31 @@ namespace Kwisspel.ViewModel
             Categories = new ObservableCollection<CategoryViewModel>(_context.Categories.ToList().Select(c => new CategoryViewModel(c,_context)));
 
             _category = Categories.Where(c => c.Id == _question.Categories_id).First();
+
+        }
+
+        public void AddQuestionOption(QuestionOptionViewModel questionOptionViewModel)
+        {
+            QuestionOptions.Add(questionOptionViewModel);
+
+            RaisePropertyChanged("QuestionOptions");
+        }
+
+        public void DeleteQuestionOption(QuestionOptionViewModel questionOptionViewModel)
+        {
+            QuestionOptions.Remove(questionOptionViewModel);
+            questionOptionViewModel.Delete();
+            RaisePropertyChanged("QuestionOptions");
+        }
+
+        private void Save()
+        {
+
+            if (Category != null && Question != null)
+            {
+                _context.SaveChanges();
+            }
+
         }
 
         public void Delete()

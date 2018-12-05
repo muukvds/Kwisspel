@@ -20,19 +20,18 @@ namespace Kwisspel.ViewModel
         public int QuestionId
         {
             get { return _questionOption.Questions_id; }
-            set { _questionOption.Questions_id = value; RaisePropertyChanged("QuestionId"); _context.SaveChanges(); }
         }
 
         public string Anwser
         {
             get { return _questionOption.anwser; }
-            set { _questionOption.anwser = value; RaisePropertyChanged("Anwser"); _context.SaveChanges(); }
+            set { _questionOption.anwser = value; RaisePropertyChanged("Anwser"); }
         }
 
         public bool IsAnwser
         {
             get { return _questionOption.isAnwser; }
-            set { _questionOption.isAnwser = value; RaisePropertyChanged("IsAnwser"); _context.SaveChanges(); }
+            set { _questionOption.isAnwser = value; RaisePropertyChanged("IsAnwser"); }
         }
 
         private QuestionOption _questionOption;
@@ -48,7 +47,25 @@ namespace Kwisspel.ViewModel
         {
             _context = context;
             _questionOption = new QuestionOption();
-            this.QuestionId = QuestionId;
+            _questionOption.Questions_id = QuestionId;
+
+            _context.QuestionOptions.Add(_questionOption);
         }
+
+        public void Delete()
+        {
+
+            _context.QuestionOptions.Remove(_questionOption);
+        }
+
+        private void Save()
+        {
+
+            if (Anwser != null)
+            {
+                _context.SaveChanges();
+            }
+        }
+
     }
 }
