@@ -11,61 +11,43 @@ namespace Kwisspel.ViewModel
     public class QuestionOptionViewModel : ViewModelBase
     {
 
-        private KwisspelEntities _context;
         public int Id
         {
-            get { return _questionOption.id; }
+            get { return QuestionOption.id; }
         }
 
         public int QuestionId
         {
-            get { return _questionOption.Questions_id; }
+            get { return QuestionOption.Questions_id; }
         }
 
         public string Anwser
         {
-            get { return _questionOption.anwser; }
-            set { _questionOption.anwser = value; RaisePropertyChanged("Anwser"); }
+            get { return QuestionOption.anwser; }
+            set { QuestionOption.anwser = value; RaisePropertyChanged(); }
         }
 
         public bool IsAnwser
         {
-            get { return _questionOption.isAnwser; }
-            set { _questionOption.isAnwser = value; RaisePropertyChanged("IsAnwser"); }
+            get { return QuestionOption.isAnwser; }
+            set { QuestionOption.isAnwser = value; RaisePropertyChanged(); }
         }
 
-        private QuestionOption _questionOption;
+        private QuestionOption QuestionOption;
 
-
-        public QuestionOptionViewModel(QuestionOption o, KwisspelEntities context )
+        public QuestionOption Model
         {
-            _context = context;
-            _questionOption = o;
+            get { return QuestionOption; }
         }
 
-        public QuestionOptionViewModel(int QuestionId, KwisspelEntities context)
+        public QuestionOptionViewModel(QuestionOption o)
         {
-            _context = context;
-            _questionOption = new QuestionOption();
-            _questionOption.Questions_id = QuestionId;
-
-            _context.QuestionOptions.Add(_questionOption);
+            QuestionOption = o;
         }
 
-        public void Delete()
+        public QuestionOptionViewModel()
         {
-
-            _context.QuestionOptions.Remove(_questionOption);
+            QuestionOption = new QuestionOption();
         }
-
-        private void Save()
-        {
-
-            if (Anwser != null)
-            {
-                _context.SaveChanges();
-            }
-        }
-
     }
 }

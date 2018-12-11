@@ -43,7 +43,7 @@ namespace Kwisspel.ViewModel
             ////}
 
             SimpleIoc.Default.Register<QuizListViewModel>();
-            SimpleIoc.Default.Register<QuestionManagementViewModel>(() => new QuestionManagementViewModel(ServiceLocator.Current.GetInstance<QuizListViewModel>().Context));
+            SimpleIoc.Default.Register<QuestionManagementViewModel>(() => new QuestionManagementViewModel(QuizList.Context));
 
         }
 
@@ -67,7 +67,15 @@ namespace Kwisspel.ViewModel
         public AddQuestionViewModel AddQuestion
         {
             get {
-                return new AddQuestionViewModel(ServiceLocator.Current.GetInstance<QuizListViewModel>().Context);
+                return new AddQuestionViewModel(QuizList.Context,QuestionManagement.Questions);
+            }
+        }
+
+        public AddQuestionViewModel EditQuestion
+        {
+            get
+            {
+                return new AddQuestionViewModel(QuestionManagement.SelectedQuestion, QuizList.Context);
             }
         }
 

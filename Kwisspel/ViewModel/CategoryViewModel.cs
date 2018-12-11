@@ -9,19 +9,18 @@ namespace Kwisspel.ViewModel
 {
    public class CategoryViewModel : ViewModelBase
     {
-        private KwisspelEntities _context;
 
         private Category _category;
 
         public int Id {
             get {return _category.id; }
-            set { _category.id = value; RaisePropertyChanged("Id"); }
+            set { _category.id = value; RaisePropertyChanged(); }
         }
 
         public string Name
         {
             get { return _category.name; }
-            set { _category.name = value; RaisePropertyChanged("Name"); }
+            set { _category.name = value; RaisePropertyChanged(); }
         }
 
         public Category Model
@@ -29,9 +28,8 @@ namespace Kwisspel.ViewModel
             get { return _category; }
         }
 
-        public CategoryViewModel(Category c, KwisspelEntities context)
+        public CategoryViewModel(Category c)
         {
-            _context = context;
             _category = c;
         }
 

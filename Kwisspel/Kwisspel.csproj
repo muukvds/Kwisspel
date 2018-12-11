@@ -114,6 +114,7 @@
     <Compile Include="ViewModel\QuestionManagementViewModel.cs" />
     <Compile Include="ViewModel\QuestionOptionViewModel.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />
+    <Compile Include="ViewModel\QuizeManagementViewModel.cs" />
     <Compile Include="ViewModel\QuizListViewModel.cs" />
     <Compile Include="ViewModel\QuizViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

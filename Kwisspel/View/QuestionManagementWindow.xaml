@@ -26,7 +26,6 @@
                     <DataGridTemplateColumn Width="50" Header="Edit">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <!-- De binding naar 'DeleteSongCommand' is anders dan normaal. Hoe komt dit?-->
                                 <Button Command="{Binding DataContext.EditQuestionCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="30" Background="#FF6F9BDA">Edit</Button>
                             </DataTemplate>

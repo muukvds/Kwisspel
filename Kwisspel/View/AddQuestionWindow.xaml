@@ -24,11 +24,11 @@
 
             <Label Content ="Category:"/>
             <ComboBox 
-                ItemsSource="{Binding Question.Categories}" 
+                ItemsSource="{Binding Categories}" 
                 DisplayMemberPath="Name"
                 SelectedValue="{Binding Question.Category, Mode=TwoWay}"/>
 
-            <Button Content="Nieuw Vragen Optie" Command="{Binding AddQuestionOptionCommand}"/>
+            <Button Content="Nieuw Andwoord" Command="{Binding AddQuestionOptionCommand}"/>
             
             <DataGrid Width="auto" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionOption, Mode=TwoWay}" ItemsSource="{Binding Question.QuestionOptions }" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
@@ -59,7 +59,7 @@
 
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="opslaan" Command="{Binding AddQuestionCommand}"/>
+            <Button Content="opslaan" Command="{Binding SaveQuestionCommand}"/>
         </StackPanel>
     </Border>
 </Window>

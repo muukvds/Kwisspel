@@ -11,9 +11,7 @@ namespace Kwisspel.ViewModel
 {
    public class QuestionViewModel: ViewModelBase
     {
-        private KwisspelEntities _context;
         public ObservableCollection<QuestionOptionViewModel> QuestionOptions { get; set; }
-        public ObservableCollection<CategoryViewModel> Categories { get; set; }
 
 
         public int Id
@@ -24,77 +22,51 @@ namespace Kwisspel.ViewModel
         public string Question
         {
             get { return _question.question; }
-            set { _question.question = value; RaisePropertyChanged("Question"); Save(); }
+            set { _question.question = value; RaisePropertyChanged();}
         }
 
         private CategoryViewModel _category;
 
         public CategoryViewModel Category {
             get { return _category; }
-            set { _category = value;  _question.Category = _category.Model; RaisePropertyChanged("Category"); Save(); }
+            set { _category = value;  _question.Category = _category.Model; RaisePropertyChanged(); }
         }
 
         private Question _question;
 
-        public QuestionViewModel(KwisspelEntities context )
+        public Question Model
         {
-            _context = context;
-            _question = new Question();
-            _context.Questions.Add(_question);
-
-            QuestionOptions = new ObservableCollection<QuestionOptionViewModel>();
-            Categories = new ObservableCollection<CategoryViewModel>(_context.Categories.ToList().Select(c => new CategoryViewModel(c,_context)));
-           
-            _context.Questions.Add(_question);
+            get { return _question; }
         }
 
-        public QuestionViewModel(Question q, KwisspelEntities context)
+        public QuestionViewModel()
         {
-            _context = context;
+            _question = new Question();
+
+            QuestionOptions = new ObservableCollection<QuestionOptionViewModel>();
+           
+        }
+
+        public QuestionViewModel(Question q)
+        {
             _question = q;
-
-            QuestionOptions = new ObservableCollection<QuestionOptionViewModel>(_question.QuestionOptions.ToList().Select(o => new QuestionOptionViewModel(o,_context)));
-            Categories = new ObservableCollection<CategoryViewModel>(_context.Categories.ToList().Select(c => new CategoryViewModel(c,_context)));
-
-            _category = Categories.Where(c => c.Id == _question.Categories_id).First();
+            _category = new CategoryViewModel(_question.Category);
+            QuestionOptions = new ObservableCollection<QuestionOptionViewModel>(_question.QuestionOptions.ToList().Select(o => new QuestionOptionViewModel(o)));
 
         }
 
         public void AddQuestionOption(QuestionOptionViewModel questionOptionViewModel)
         {
             QuestionOptions.Add(questionOptionViewModel);
+            _question.QuestionOptions.Add(questionOptionViewModel.Model);
 
-            RaisePropertyChanged("QuestionOptions");
+            RaisePropertyChanged();
         }
 
         public void DeleteQuestionOption(QuestionOptionViewModel questionOptionViewModel)
         {
-            QuestionOptions.Remove(questionOptionViewModel);
-            questionOptionViewModel.Delete();
-            RaisePropertyChanged("QuestionOptions");
-        }
-
-        private void Save()
-        {
-
-            if (Category != null && Question != null)
-            {
-                _context.SaveChanges();
-            }
-
-        }
-
-        public void Delete()
-        {
-            var childData = _question.QuestionOptions.ToList();
-            foreach (var data in childData)
-            {
-                _context.QuestionOptions.Remove(data);
-            }
-            _context.SaveChanges();
-        
-        _context.Questions.Remove(_question);
-            _context.SaveChanges();
+            _question.QuestionOptions.Remove(questionOptionViewModel.Model);
+            RaisePropertyChanged();
         }
     }
 }

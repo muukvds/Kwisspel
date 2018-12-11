@@ -31,6 +31,7 @@ namespace Kwisspel.ViewModel
 
         public ICommand DeleteQuestionCommand { get; set; }
         public ICommand AddQuestionCommand { get; set; }
+        public ICommand EditQuestionCommand { get; set; }
 
 
 
@@ -40,22 +41,38 @@ namespace Kwisspel.ViewModel
 
             DeleteQuestionCommand = new RelayCommand(DeleteQuestion);
             AddQuestionCommand = new RelayCommand(AddQuestion);
+            EditQuestionCommand = new RelayCommand(EditQuestion);
 
-            Categories = new ObservableCollection<CategoryViewModel>(_context.Categories.ToList().Select(c => new CategoryViewModel(c, _context)));
-            Questions = new ObservableCollection<QuestionViewModel>(_context.Questions.ToList().Select(q => new QuestionViewModel(q, _context)));
+            Categories = new ObservableCollection<CategoryViewModel>(_context.Categories.ToList().Select(c => new CategoryViewModel(c)));
+            Questions = new ObservableCollection<QuestionViewModel>(_context.Questions.ToList().Select(q => new QuestionViewModel(q)));
 
         }
 
         private void DeleteQuestion()
         {
-            SelectedQuestion.Delete();
-            Questions.Remove(SelectedQuestion);
+
+
+            var childData = _selectedQuestion.Model.QuestionOptions.ToList();
+            foreach (var data in childData)
+            {
+                _context.QuestionOptions.Remove(data);
+            }
+   
+
+            _context.Questions.Remove(_selectedQuestion.Model);
+            Questions.Remove(_selectedQuestion);
+            _context.SaveChanges();
         }
 
         private void AddQuestion()
         {
             AddQuestionWindow addQuestionWindow = new AddQuestionWindow();
             addQuestionWindow.Show();
+        }
+        private void EditQuestion()
+        {
+            EditQuestionWindow editQuestionWindow = new EditQuestionWindow();
+            editQuestionWindow.Show();
         }
 
         private bool CanDeleteQuestion()
