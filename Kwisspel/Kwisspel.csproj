@@ -109,7 +109,9 @@
     <Compile Include="Quizze.cs">
       <DependentUpon>Kwisspel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddQuestionToQuizViewModel.cs" />
     <Compile Include="ViewModel\AddQuestionViewModel.cs" />
+    <Compile Include="ViewModel\AddQuizViewModel.cs" />
     <Compile Include="ViewModel\CategoryViewModel.cs" />
     <Compile Include="ViewModel\QuestionManagementViewModel.cs" />
     <Compile Include="ViewModel\QuestionOptionViewModel.cs" />
@@ -118,6 +120,9 @@
     <Compile Include="ViewModel\QuizListViewModel.cs" />
     <Compile Include="ViewModel\QuizViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\AddQuestionToQuizWindow.xaml.cs">
+      <DependentUpon>AddQuestionToQuizWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddQuestionWindow.xaml.cs">
       <DependentUpon>AddQuestionWindow.xaml</DependentUpon>
     </Compile>
@@ -139,6 +144,10 @@
     <Compile Include="View\QuizeManagementWindow.xaml.cs">
       <DependentUpon>QuizeManagementWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddQuestionToQuizWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddQuestionWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

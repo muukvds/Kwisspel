@@ -1,0 +1,65 @@
+﻿<Window x:Class="Kwisspel.View.AddQuestionToQuizWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Kwisspel.View"
+        mc:Ignorable="d"
+        Title="AddQuestionToQuizWindow" Height="450" Width="800"
+   DataContext="{Binding AddQuestionToQuiz, Source={StaticResource Locator}}">
+    <Border BorderThickness="12">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Vraag Toevoegen" FontSize="28" Grid.Column="0"/>
+
+            </Grid>
+
+            <Label Content="Vraag:"/>
+            <TextBox Text="{Binding Question.Question, Mode=TwoWay}"/>
+
+            <Label Content ="Category:"/>
+            <ComboBox 
+                ItemsSource="{Binding Categories}" 
+                DisplayMemberPath="Name"
+                SelectedValue="{Binding Question.Category, Mode=TwoWay}"/>
+
+            <Button Content="Nieuw Andwoord" Command="{Binding AddQuestionOptionCommand}"/>
+
+            <DataGrid Width="auto" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionOption, Mode=TwoWay}" ItemsSource="{Binding Question.QuestionOptions }" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Anwser">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Anwser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="IsAnwser">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox IsChecked="{Binding IsAnwser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Width="50" Header="Delete">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <!-- De binding naar 'DeleteSongCommand' is anders dan normaal. Hoe komt dit?-->
+                                <Button Command="{Binding DataContext.DeleteQuestionOptionCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="50" Height="30" Background="#FFD45134">Delete</Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="opslaan" Command="{Binding SaveQuestionCommand}"/>
+        </StackPanel>
+    </Border>
+</Window>

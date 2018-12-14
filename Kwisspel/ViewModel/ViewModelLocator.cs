@@ -64,6 +64,14 @@ namespace Kwisspel.ViewModel
             }
         }
 
+        public AddQuestionToQuizViewModel AddQuestionToQuiz
+        {
+            get
+            {
+                return new AddQuestionToQuizViewModel();
+            }
+        }
+
         public QuestionManagementViewModel QuestionManagement
         {
             get
