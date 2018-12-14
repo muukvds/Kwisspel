@@ -22,10 +22,10 @@ namespace Kwisspel.ViewModel
 
         public QuestionViewModel SelectedQuestion
         {
-            get { return _selectedQuestion; }
+            get => _selectedQuestion; 
             set {
                 _selectedQuestion = value;
-                base.RaisePropertyChanged();
+                RaisePropertyChanged();
             }
         }
 

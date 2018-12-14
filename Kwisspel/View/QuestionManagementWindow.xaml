@@ -19,7 +19,9 @@
 
             </Grid>
 
-            <DataGrid Width="400" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestion, Mode=TwoWay}" ItemsSource="{Binding Questions}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+            <Button Content="Nieuwe vraag " Command="{Binding AddQuestionCommand}"/>
+
+            <DataGrid Width="auto" MaxHeight="450"  AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestion, Mode=TwoWay}" ItemsSource="{Binding Questions}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
                     <DataGridTextColumn Header="Naam" Binding="{Binding Question}" Width="*" />
@@ -46,9 +48,8 @@
 
             <Label Content ="Category:"/>
             <Label Content ="{Binding SelectedQuestion.Category.Name}"/>
-            <Button Content="Niewe vraag " Command="{Binding AddQuestionCommand}"/>
 
-            <DataGrid Width="400" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionOption, Mode=TwoWay}" ItemsSource="{Binding SelectedQuestion.QuestionOptions }" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+            <DataGrid MaxHeight="110" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding SelectedQuestion.QuestionOptions }" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
                     <DataGridTextColumn Header="QuestionId" Binding="{Binding QuestionId}" Foreground="#FF1D1616" />

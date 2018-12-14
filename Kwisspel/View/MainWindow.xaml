@@ -18,9 +18,9 @@
                 <TextBlock Text="Quiz lijst" FontSize="28" Grid.Column="0"/>
                 <StackPanel Grid.Column="1" Width="auto" Orientation="Horizontal" >
 
-                    <Button Width="auto" Height="auto" Margin="1" FontSize="28" Content="Play" 
+                    <Button Width="auto" Height="auto" Margin="1" FontSize="28" Content="Random Play" 
                         Foreground="White" Background="#FFDA8229" 
-                        Grid.Column="1" Command="{Binding ShowPlayRandomQuizeCommand}">
+                        Grid.Column="1" Command="{Binding ShowPlayRandomQuizCommand}">
                 </Button>
 
                     <Button Width="auto" Height="auto" Margin="1" FontSize="28" Content="Vragen beheer" 
@@ -30,13 +30,13 @@
 
                     <Button Width="auto" Height="auto" Margin="1" FontSize="28" Content="Quiz beheer" 
                         Foreground="White" FontWeight="Bold" Background="#FF44AE3F" 
-                        Grid.Column="3"  Command="{Binding ShowQuizeManagementCommand}">
+                        Grid.Column="3"  Command="{Binding ShowQuizManagementCommand}">
                 </Button>
                 </StackPanel>
 
             </Grid>
 
-            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuize, Mode=TwoWay}" ItemsSource="{Binding Quizzes}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+            <DataGrid AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuiz, Mode=TwoWay}" ItemsSource="{Binding Quizzes}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
                     <DataGridTextColumn Header="Naam" Binding="{Binding Name}" Width="*" />
@@ -44,7 +44,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
          
-                                <Button Command="{Binding DataContext.ShowPlayQuizeCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                <Button Command="{Binding DataContext.ShowPlayQuizCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                     BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="30" Background="#FF6F9BDA">Play</Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

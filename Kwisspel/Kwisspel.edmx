@@ -107,6 +107,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Questions_Categories_id">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Questions">
+              <PropertyRef Name="Categories_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_QuestionsQuizzes_Questions">
           <End Role="Questions" Type="Self.Questions" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -135,18 +147,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Quizzes_Categories_id">
-          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
-          <End Role="Questions" Type="Self.Questions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categories">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Questions">
-              <PropertyRef Name="Categories_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="Anwsers" EntityType="Self.Anwsers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
@@ -170,6 +170,10 @@
             <End Role="Questions" EntitySet="Questions" />
             <End Role="QuestionOptions" EntitySet="QuestionOptions" />
           </AssociationSet>
+          <AssociationSet Name="FK_Questions_Categories_id" Association="Self.FK_Questions_Categories_id">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Questions" EntitySet="Questions" />
+          </AssociationSet>
           <AssociationSet Name="FK_QuestionsQuizzes_Questions" Association="Self.FK_QuestionsQuizzes_Questions">
             <End Role="Questions" EntitySet="Questions" />
             <End Role="QuestionsQuizzes" EntitySet="QuestionsQuizzes" />
@@ -177,10 +181,6 @@
           <AssociationSet Name="FK_QuestionsQuizzes_Quizzes" Association="Self.FK_QuestionsQuizzes_Quizzes">
             <End Role="Quizzes" EntitySet="Quizzes" />
             <End Role="QuestionsQuizzes" EntitySet="QuestionsQuizzes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Quizzes_Categories_id" Association="Self.FK_Quizzes_Categories_id">
-            <End Role="Categories" EntitySet="Categories" />
-            <End Role="Questions" EntitySet="Questions" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -288,8 +288,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_QuestionOptions_Questions">
-          <End Role="Questions" Type="Self.Question" Multiplicity="1" />
-          <End Role="QuestionOptions" Type="Self.QuestionOption" Multiplicity="*" />
+          <End Role="Questions" Type="Self.Question" Multiplicity="1" >
+          </End>
+          <End Role="QuestionOptions" Type="Self.QuestionOption" Multiplicity="*" >
+          </End>
           <ReferentialConstraint>
             <Principal Role="Questions">
               <PropertyRef Name="id" />

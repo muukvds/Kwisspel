@@ -65,8 +65,22 @@ namespace Kwisspel.ViewModel
 
         public void DeleteQuestionOption(QuestionOptionViewModel questionOptionViewModel)
         {
-            _question.QuestionOptions.Remove(questionOptionViewModel.Model);
+            QuestionOptions.Remove(questionOptionViewModel);
             RaisePropertyChanged();
+        }
+
+        public bool AllOptionsFilled()
+        {
+            bool allOptionsFilled = true;
+
+            foreach (var option in QuestionOptions)
+            {
+                if (string.IsNullOrEmpty(option.Anwser))
+                {
+                    allOptionsFilled = false;
+                }
+            }
+            return allOptionsFilled;
         }
     }
 }

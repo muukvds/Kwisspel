@@ -16,7 +16,7 @@
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Vraag Toevoegen" FontSize="28" Grid.Column="0"/>
+                <TextBlock Text="Vraag Aanpassen" FontSize="28" Grid.Column="0"/>
 
             </Grid>
 

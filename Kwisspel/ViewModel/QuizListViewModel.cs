@@ -1,3 +1,4 @@
+using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Kwisspel.View;
@@ -39,7 +40,12 @@ namespace Kwisspel.ViewModel
             }
         }
 
-        public ICommand ShowQuestionManagementCommand { get; set; }
+        public RelayCommand ShowQuestionManagementCommand { get; set; }
+        public RelayCommand ShowQuizManagementCommand { get; set; }
+        public RelayCommand ShowPlayQuizCommand { get; set; }
+        public RelayCommand ShowPlayRandomQuizCommand { get; set; }
+
+
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -49,17 +55,42 @@ namespace Kwisspel.ViewModel
             Context = new KwisspelEntities();
 
             ShowQuestionManagementCommand = new RelayCommand(ShowQuestionManagement);
-            
+            ShowQuizManagementCommand = new RelayCommand(ShowQuizManagement);
+            ShowPlayQuizCommand = new RelayCommand(ShowPlayQuizManagement);
+            ShowPlayRandomQuizCommand = new RelayCommand(ShowPlayRandomQuiz);
 
-            Quizzes = new ObservableCollection<QuizViewModel>(Context.Quizzes.ToList().Select(q => new QuizViewModel(q,Context)));
+            Quizzes = new ObservableCollection<QuizViewModel>(Context.Quizzes.ToList().Select(q => new QuizViewModel(q)));
         }
 
-        public void ShowQuestionManagement()
+        private void ShowQuestionManagement()
         {
-            var QuestionManagement = new QuestionManagementWindow();
-            QuestionManagement.Show();
+            var questionManagementWindow = new QuestionManagementWindow();
+            questionManagementWindow.Show();
 
         }
+
+        private void ShowQuizManagement()
+        {
+            var quizManagementWindow = new QuizeManagementWindow();
+            quizManagementWindow.Show();
+        }
+
+        private void ShowPlayQuizManagement()
+        {
+            var playQuizWindow = new PlayQuizWindow();
+            playQuizWindow.Show();
+        }
+
+        private void ShowPlayRandomQuiz()
+        {
+            Random random = new Random();
+            int randomIndex = random.Next(0, Quizzes.Count);
+            _selectedQuiz = Quizzes[randomIndex];
+
+            var playQuizWindow = new PlayQuizWindow();
+            playQuizWindow.Show();
+        }
+
 
 
 

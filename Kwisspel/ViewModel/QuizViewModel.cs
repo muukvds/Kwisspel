@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,31 +10,51 @@ namespace Kwisspel.ViewModel
 {
     public class QuizViewModel: ViewModelBase
     {
-        private KwisspelEntities _context;
         public int Id
         {
             get { return _quizze.id; }
-            set { _quizze.id = value; RaisePropertyChanged("Id"); }
         }
 
         public string Name
         {
             get { return _quizze.name; }
-            set { _quizze.name = value; RaisePropertyChanged("Name"); }
+            set { _quizze.name = value; RaisePropertyChanged(); }
         }
+
+        public ObservableCollection<QuestionViewModel> Questions { get; set; }
 
         private Quizze _quizze;
 
-        public QuizViewModel(KwisspelEntities context)
+        public Quizze Model
         {
-            _context = context;
-            _quizze = new Quizze();
+            get { return _quizze; }
         }
 
-        public QuizViewModel(Quizze q, KwisspelEntities context)
+        public QuizViewModel()
         {
-            _context = context;
-            _quizze = q;
+            _quizze = new Quizze();
+            Questions = new ObservableCollection<QuestionViewModel>(_quizze.Questions.ToList().Select(q => new QuestionViewModel(q)));
         }
+
+        public QuizViewModel(Quizze quiz)
+        {
+            _quizze = quiz;
+            Questions = new ObservableCollection<QuestionViewModel>(_quizze.Questions.ToList().Select(q => new QuestionViewModel(q)));
+        }
+
+        public void AddQuestion(QuestionViewModel questionViewModel)
+        {
+            Questions.Add(questionViewModel);
+            _quizze.Questions.Add(questionViewModel.Model);
+            RaisePropertyChanged();
+        }
+
+        public void RemoveQuestion(QuestionViewModel questionViewModel)
+        {
+            Questions.Remove(questionViewModel);
+            _quizze.Questions.Remove(questionViewModel.Model);
+            RaisePropertyChanged();
+        }
+
     }
 }
