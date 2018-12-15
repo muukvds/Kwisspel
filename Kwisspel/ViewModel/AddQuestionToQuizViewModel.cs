@@ -22,10 +22,16 @@ namespace Kwisspel.ViewModel
 
         public ObservableCollection<CategoryViewModel> Categories { set; get; }
 
-
+        private QuestionOptionViewModel _selectedQuestionOption;
         public QuestionOptionViewModel SelectedQuestionOption
         {
-            get; set;
+            get { return _selectedQuestionOption;}
+            set
+            {
+                _selectedQuestionOption = value;
+                RaisePropertyChanged();
+                ResetCanExecute();
+            }
         }
 
         private KwisspelEntities _context;
@@ -81,7 +87,7 @@ namespace Kwisspel.ViewModel
 
         private bool CanSaveQuestion()
         {
-            return (Question.Question != null || Question.Question != "") && Question.QuestionOptions.Count >= 2;
+            return (Question.Question != null || Question.Question != "") && Question.QuestionOptions.Count >= 2 && Question.AllOptionsFilled();
         }
 
         private void ResetCanExecute()

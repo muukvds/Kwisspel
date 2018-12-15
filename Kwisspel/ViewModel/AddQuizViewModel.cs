@@ -130,7 +130,7 @@ namespace Kwisspel.ViewModel
 
         private bool CanRemoveQuestion()
         {
-            return _quiz.Questions.Count > 2 && SelectedQuestionDataGrid != null;
+            return _quiz.Questions.Count > 2;
         }
 
         private bool CanSaveQuiz()
