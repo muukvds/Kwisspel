@@ -28,6 +28,10 @@ namespace Kwisspel.ViewModel
             {
                 _currentQuestion = value;
                 RaisePropertyChanged();
+                RaisePropertyChanged("ButtonOneText");
+                RaisePropertyChanged("ButtonTwoText");
+                RaisePropertyChanged("ButtonThreeText");
+                RaisePropertyChanged("ButtonFourText");
             }
         }
 
@@ -170,6 +174,7 @@ namespace Kwisspel.ViewModel
             _questionIndex = 0;
             CurrentQuestion = Quiz.Questions[_questionIndex];
             ShowEndScreen = false;
+
             PressButtonOneCommand = new RelayCommand(PressButtonOne);
             PressButtonTwoCommand = new RelayCommand(PressButtonTwo);
             PressButtonThreeCommand = new RelayCommand(PressButtonThree);
