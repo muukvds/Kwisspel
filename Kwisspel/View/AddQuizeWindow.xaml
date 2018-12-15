@@ -5,8 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kwisspel.View"
         mc:Ignorable="d"
-        Title="AddQuizeWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="AddQuizeWindow" Height="700" Width="800"
+        DataContext="{Binding AddQuiz, Source={StaticResource Locator}}">
+    <Border BorderThickness="12">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Quiz Toevoegen" FontSize="28" Grid.Column="0"/>
+
+            </Grid>
+
+            <Label Content="Naam:"/>
+            <TextBox Text="{Binding Quiz.Name, Mode=TwoWay}"/>
+
+            <Label Content ="Vragen:"/>
+            <ComboBox 
+                ItemsSource="{Binding QuestionsComboBox}" 
+                SelectedValue="{Binding SelectedQuestionComboBox, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+               
+                            <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Vraag: " />
+                            <TextBlock Text="{Binding Question}" />
+                            <TextBlock Text=" - Categorie: " />
+                            <TextBlock Text="{Binding Category.Name}" />
+                            </StackPanel>
+         
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+</ComboBox>
+
+            <Button Content="Geselecteerde vraag toevoegen" Command="{Binding AddQuestionCommand}"/>
+            <Button Content="Nieuwe vraag aanmaken" Command="{Binding ShowAddQuestionCommand}"/>
+            <Label>Vragen in de quiz:</Label>
+            <DataGrid Width="auto" Height="220" MaxHeight="220" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedQuestionDataGrid, Mode=TwoWay}" ItemsSource="{Binding Quiz.Questions }" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Vraag" Binding="{Binding Question}" />
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Label>Vragenopties van geslecteerde vraag:</Label>
+            <DataGrid Height="110" MaxHeight="110" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding SelectedQuestionDataGrid.QuestionOptions }" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
+                    <DataGridTextColumn Header="QuestionId" Binding="{Binding QuestionId}" Foreground="#FF1D1616" />
+                    <DataGridTextColumn Header="Anwser" IsReadOnly="False"  Binding="{Binding Anwser}" Width="*" />
+                    <DataGridCheckBoxColumn Header="IsAnwser" Binding="{Binding IsAnwser}"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Content="opslaan" Command="{Binding SaveQuizCommand}"/>
+        </StackPanel>
+    </Border>
 </Window>

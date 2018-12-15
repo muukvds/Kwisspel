@@ -81,7 +81,7 @@ namespace Kwisspel.ViewModel
 
         private bool CanSaveQuestion()
         {
-            return (Question.Question != null || Question.Question != "") && Question.QuestionOptions.Count > 2;
+            return (Question.Question != null || Question.Question != "") && Question.QuestionOptions.Count >= 2;
         }
 
         private void ResetCanExecute()

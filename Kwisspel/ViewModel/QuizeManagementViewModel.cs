@@ -19,8 +19,14 @@ namespace Kwisspel.ViewModel
         public QuizViewModel SelectedQuiz
         {
             get { return _selectedQuiz; }
-            set { _selectedQuiz = value; }
+            set
+            {
+                _selectedQuiz = value;
+                RaisePropertyChanged();
+            }
         }
+
+        public AddQuizViewModel AddQuizViewModel { get; private set; }
 
         public ObservableCollection<QuizViewModel> Quizzes { get; set; }
 
@@ -28,11 +34,11 @@ namespace Kwisspel.ViewModel
         public RelayCommand ShowEditQuizWindowCommand { get; set; }
         public RelayCommand DeleteQuizCommand { get; set; }
 
-        public QuizeManagementViewModel(KwisspelEntities context)
+        public QuizeManagementViewModel(KwisspelEntities context, ObservableCollection<QuizViewModel> quizzes)
         {
             _context = context;
 
-            Quizzes = new ObservableCollection<QuizViewModel>(_context.Quizzes.ToList().Select(q => new QuizViewModel(q)));
+            Quizzes = quizzes;
 
             ShowAddQuizWindowCommand  = new RelayCommand(ShowAddQuizWindow);
             ShowEditQuizWindowCommand  = new RelayCommand(ShowEditQuizWindow);
@@ -41,12 +47,14 @@ namespace Kwisspel.ViewModel
 
         private void ShowAddQuizWindow()
         {
+            this.AddQuizViewModel = new AddQuizViewModel(_context,Quizzes);
             var addQuizWindow = new AddQuizeWindow();
             addQuizWindow.Show();
         }
 
         private void ShowEditQuizWindow()
         {
+            this.AddQuizViewModel = new AddQuizViewModel(_context, _selectedQuiz, Quizzes);
             var editQuizWindow = new EditQuizeWindow();
             editQuizWindow.Show();
         }
