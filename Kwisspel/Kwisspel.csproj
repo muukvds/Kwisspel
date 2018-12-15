@@ -113,6 +113,7 @@
     <Compile Include="ViewModel\AddQuestionViewModel.cs" />
     <Compile Include="ViewModel\AddQuizViewModel.cs" />
     <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\PlayQuizViewModel.cs" />
     <Compile Include="ViewModel\QuestionManagementViewModel.cs" />
     <Compile Include="ViewModel\QuestionOptionViewModel.cs" />
     <Compile Include="ViewModel\QuestionViewModel.cs" />

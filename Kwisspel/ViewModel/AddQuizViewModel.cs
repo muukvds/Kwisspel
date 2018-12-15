@@ -101,7 +101,6 @@ namespace Kwisspel.ViewModel
 
         private void RemoveQuestion()
         {
-
             QuestionsComboBox.Add(SelectedQuestionDataGrid);
             _quiz.RemoveQuestion(SelectedQuestionDataGrid);
             ResetCanExecute();
@@ -115,7 +114,11 @@ namespace Kwisspel.ViewModel
 
         private void SaveQuiz()
         {
-            _quizzes.Add(Quiz);
+         
+            if (!_quizzes.Contains(Quiz))
+            {
+                 _quizzes.Add(Quiz);
+            }
             _context.SaveChanges();
         }
 

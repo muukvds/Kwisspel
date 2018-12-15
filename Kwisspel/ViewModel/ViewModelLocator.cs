@@ -101,6 +101,15 @@ namespace Kwisspel.ViewModel
             }
         }
 
+        public PlayQuizViewModel PlayQuiz
+        {
+            get
+            {
+                return new PlayQuizViewModel(QuizList.SelectedQuiz);
+
+            }
+        }
+
 
 
         public static void Cleanup()

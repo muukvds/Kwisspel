@@ -5,8 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Kwisspel.View"
         mc:Ignorable="d"
-        Title="PlayQuizWindow" Height="450" Width="800">
+        Title="PlayQuizWindow" Height="450" Width="800"
+        DataContext="{Binding PlayQuiz, Source={StaticResource Locator}}">
     <Grid>
-        
-    </Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="{Binding CurrentQuestion.Question}"></Label>
+
+        <Rectangle Grid.Column="0" Grid.Row="1" Fill="Red" Visibility="{Binding ShowButtonOne, Converter={StaticResource BoolToVis}}"></Rectangle>
+        <Rectangle Grid.Column="1" Grid.Row="1" Fill="Green" Visibility="{Binding ShowButtonTwo, Converter={StaticResource BoolToVis}}"></Rectangle>
+        <Rectangle Grid.Column="0" Grid.Row="2" Fill="Blue" Visibility="{Binding ShowButtonThree, Converter={StaticResource BoolToVis}}"></Rectangle>
+        <Rectangle Grid.Column="1" Grid.Row="2" Fill="YellowGreen" Visibility="{Binding ShowButtonFour, Converter={StaticResource BoolToVis}}"></Rectangle>
+
+        <Button Grid.Column="0" Grid.Row="1" Command="{Binding PressButtonOneCommand}" Content="{Binding ButtonOneText}" Background="Transparent" Visibility="{Binding ShowButtonOne, Converter={StaticResource BoolToVis}}"></Button>
+        <Button Grid.Column="1" Grid.Row="1" Command="{Binding PressButtonTwoCommand}" Content="{Binding ButtonTwoText}" Background="Transparent" Visibility="{Binding ShowButtonTwo, Converter={StaticResource BoolToVis}}"></Button>
+        <Button Grid.Column="0" Grid.Row="2" Command="{Binding PressButtonThreeCommand}" Content="{Binding ButtonThreeText}" Background="Transparent" Visibility="{Binding ShowButtonThree, Converter={StaticResource BoolToVis}}"></Button>
+        <Button Grid.Column="1" Grid.Row="2" Command="{Binding PressButtonFourCommand}" Content="{Binding ButtonFourText}" Background="Transparent" Visibility="{Binding ShowButtonFour, Converter={StaticResource BoolToVis}}"></Button>
+
+        <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3" Fill="Azure" Visibility="{Binding ShowEndScreen, Converter={StaticResource BoolToVis}}"></Rectangle>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Visibility="{Binding ShowEndScreen, Converter={StaticResource BoolToVis}}">
+        <Label Content="Quiz uitgespeeld je hebt "  Visibility="{Binding ShowEndScreen}"></Label>
+        <Label Content="{Binding AnswersCorrect}"  Visibility="{Binding ShowEndScreen}"></Label>
+        <Label Content=" van de " Visibility="{Binding ShowEndScreen}"></Label>
+        <Label Content="{Binding Quiz.Questions.Count}" Visibility="{Binding ShowEndScreen}"></Label>
+        <Label Content="Goed!!!" Visibility="{Binding ShowEndScreen}"></Label>
+  
+        </StackPanel>
+     </Grid>
 </Window>
